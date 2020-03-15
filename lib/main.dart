@@ -1,70 +1,112 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:myplaces/redux/Actions.dart';
+import 'package:redux/redux.dart';
+import 'AppRoutes.dart';
+import 'Localization.dart';
+import 'features/PlaceholderScreen.dart';
+import 'features/authentication/SignIn.dart';
+import 'features/authentication/SignUp.dart';
+import 'features/home/home_page.dart';
+import 'features/newgame/NewPlace.dart';
+import 'redux/AppState.dart';
+import 'redux/middlewares/AppMiddlewares.dart';
+import 'redux/reducers/AppReducer.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    runApp(MyApp());
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]).then((_) {
+    runApp(MyPlacesApp());
   });
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MyPlacesApp extends StatelessWidget {
+  final Store<AppState> store = Store<AppState>(appReducer,
+      initialState: AppState.loading(),
+      middleware: createAppMiddlewares()
+  );
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final ThemeData theme = ThemeData(
+    primaryColor: Colors.grey.shade900,
+    primaryColorLight: Colors.grey.shade800,
+    primaryColorDark: Colors.black,
+    scaffoldBackgroundColor: Colors.grey.shade800,
+//          textTheme: TextTheme(
+//            body1: TextStyle(color: Colors.white),
+//            display1: TextStyle(color: Colors.white),
+//            title: TextStyle(color: Colors.white),
+//          ),
+    iconTheme: IconThemeData(color: Colors.white),
+    accentColor: Colors.yellow[500],
+    pageTransitionsTheme: const PageTransitionsTheme(
+        builders: <TargetPlatform, PageTransitionsBuilder>{
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder()
+        }
+    )
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        builder: (BuildContext context, Widget child) {
+          return ScrollConfiguration(
+            behavior: MyScrollBehavior(),
+            child: child,
+          );
+        },
+        navigatorKey: navigatorKey,
+        title: AppLocalizations.appTitle,
+        localizationsDelegates: <AppLocalizationsDelegate>[
+          AppLocalizationsDelegate(),
+        ],
+        theme: theme,
+        routes: <String, Widget Function(BuildContext)>{
+          AppRoutes.signIn: (BuildContext context) => const SignIn(),
+          AppRoutes.signUp: (BuildContext context) => const SignUp(),
+          AppRoutes.home: (BuildContext context) => const HomePage(),
+          AppRoutes.favorite: (BuildContext context) => PlaceholderScreen(),
+          AppRoutes.profile: (BuildContext context) => PlaceholderScreen(),
+          AppRoutes.addGame: (BuildContext context) => NewPlace()
+        },
+        home: FutureBuilder<FirebaseUser>(
+          future: FirebaseAuth.instance.currentUser(),
+          builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot){
+            switch (snapshot.connectionState){
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return const CircularProgressIndicator();
+                break;
+              default:
+                if (snapshot.hasError)
+                  return const SignIn();
+                else {
+                  if (snapshot.data == null)
+                    return const SignIn();
+                  else{
+                    store.dispatch(SignInAction(snapshot.data, null, null, null));
+                    return const HomePage();
+                  }
+                }
+            }
+          },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class MyScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
