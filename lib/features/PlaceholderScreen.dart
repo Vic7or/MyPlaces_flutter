@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:myplaces/features/viewmodels/AuthViewModel.dart';
@@ -9,9 +10,10 @@ import './menu/MainMenu.dart';
 
 class PlaceholderScreen extends StatelessWidget {
 
-  Widget _getBody(ViewModel vm) => const Center(
-    child: Text('Placeholder Screen'),
-    
+
+
+  Widget _getBody() => Center(
+    child: Text("Placeholder Screen"),
   );
 
   @override
@@ -22,8 +24,8 @@ class PlaceholderScreen extends StatelessWidget {
           return StoreConnector<AppState, ViewModel>(
             distinct: true,
             converter: (Store<AppState> store) => AuthViewModel.fromStore(store),
-            builder: (BuildContext, ViewModel vm) {
-              return MainMenu(_getBody(vm));
+            builder: (BuildContext context, ViewModel vm) {
+              return MainMenu(_getBody());
             },
           );
         }
