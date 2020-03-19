@@ -6,8 +6,8 @@ class NewPlace extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text('New Game', style: TextStyle(fontSize: 20, color: Colors.white),),
             ),
             RaisedButton(
