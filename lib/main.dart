@@ -10,7 +10,7 @@ import 'features/PlaceholderScreen.dart';
 import 'features/authentication/SignIn.dart';
 import 'features/authentication/SignUp.dart';
 import 'features/home/home_page.dart';
-import 'features/newgame/NewPlace.dart';
+import 'features/newPlace/NewPlace.dart';
 import 'redux/AppState.dart';
 import 'redux/middlewares/AppMiddlewares.dart';
 import 'redux/reducers/AppReducer.dart';
@@ -32,15 +32,17 @@ class MyPlacesApp extends StatelessWidget {
   );
 
   final ThemeData theme = ThemeData(
-    primaryColor: Colors.grey.shade900,
-    primaryColorLight: Colors.grey.shade800,
+    backgroundColor: Colors.deepOrange.shade800,
+    primaryColor: Colors.orange,
+    primaryColorLight: Colors.white,
     primaryColorDark: Colors.black,
-    scaffoldBackgroundColor: Colors.grey.shade800,
-//          textTheme: TextTheme(
-//            body1: TextStyle(color: Colors.white),
-//            display1: TextStyle(color: Colors.white),
-//            title: TextStyle(color: Colors.white),
-//          ),
+    scaffoldBackgroundColor: Colors.orange,
+    textTheme: TextTheme(
+      body1: TextStyle(color: Colors.deepOrange.shade500, fontFamily: 'Orkney'),
+      body2: TextStyle(color: Colors.white, fontFamily: 'Orkney'),
+      subhead: TextStyle(color: Colors.white, fontFamily: 'Orkney', fontWeight: FontWeight.bold),
+      title: TextStyle(color: Colors.deepOrange.shade800, fontFamily: 'Orkney', /*fontWeight: FontWeight.bold*/),
+    ),
     iconTheme: IconThemeData(color: Colors.white),
     accentColor: Colors.yellow[500],
     pageTransitionsTheme: const PageTransitionsTheme(
