@@ -76,7 +76,7 @@ class MyPlacesApp extends StatelessWidget {
           AppRoutes.home: (BuildContext context) => const HomePage(),
           AppRoutes.favorite: (BuildContext context) => PlaceholderScreen(),
           AppRoutes.profile: (BuildContext context) => PlaceholderScreen(),
-          AppRoutes.addGame: (BuildContext context) => NewPlace()
+          AppRoutes.addPlace: (BuildContext context) => NewPlace()
         },
         home: FutureBuilder<FirebaseUser>(
           future: FirebaseAuth.instance.currentUser(),
