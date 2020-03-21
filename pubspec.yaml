@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   flutter_redux: ^0.6.0
   intl: ^0.15.7
+  image_picker: ^0.6.3+4
   flare_flutter: ^2.0.1
   cloud_firestore: ^0.13.4
   firebase_auth: ^0.15.5+2

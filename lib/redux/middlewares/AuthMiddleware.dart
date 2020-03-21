@@ -21,6 +21,10 @@ Future<void> _signIn(Store<AppState> store, SignInAction action, NextDispatcher 
     next(action);
     if (action.context != null)
       store.dispatch(navAction);
+    else {
+      final NavigateHomeStartUpAction homeAction = NavigateHomeStartUpAction();
+      store.dispatch(homeAction);
+    }
   }
   else {
     showLoadingDialog(action.context);
