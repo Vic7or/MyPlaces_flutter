@@ -6,9 +6,8 @@ import '../../redux/Actions.dart';
 import '../../redux/AppState.dart';
 
 class MainMenu extends StatelessWidget {
+  const MainMenu(this.body);
   final Widget body;
-
-  MainMenu(this.body);
 
   Widget _getInfoBarWorkaround() =>
       PreferredSize(child: Container(), preferredSize: const Size(0.0, 0.0));
@@ -24,9 +23,9 @@ class MainMenu extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: Theme.of(context).accentColor.withOpacity(0.7),
         onPressed: () => StoreProvider.of<AppState>(context)
-            .dispatch(NavigatePushAction(AppRoutes.addGame)),
+            .dispatch(NavigatePushAction(AppRoutes.addPlace)),
         tooltip: 'Take a new place',
-        child: Icon(Icons.photo_camera),
+        child: Icon(Icons.add_a_photo),
       ),
       body: body,
     );

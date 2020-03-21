@@ -27,6 +27,13 @@ class NavigatePopAction {
   }
 }
 
+class NavigateHomeStartUpAction {
+  @override
+  String toString() {
+    return 'NavigateHomeStartUpAction';
+  }
+}
+
 class SignInAction {
   SignInAction(this.user, this.context, this.email, this.password);
   final FirebaseUser user;
