@@ -11,7 +11,7 @@ const Place mock = Place(
 class AppState {
  const AppState({
   this.isLoading = false,
-  this.user = null,
+  this.user,
    this.places = const <Place>[mock, mock, mock, mock, mock, mock, mock, mock, mock, mock, mock, mock, mock, mock, mock, mock],
   this.route = const <String>[/*AppRoutes.home*/],
 });

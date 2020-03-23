@@ -83,7 +83,7 @@ class _SignUpState extends State<SignUp> {
               children: <Widget>[
                 Padding(
                     child: TextFormField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       maxLines: 1,
                       obscureText: false,
                       validator: (String value){
@@ -121,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 Padding(
                     child: TextFormField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       maxLines: 1,
                       obscureText: false,
                       validator: (String value){
@@ -204,13 +204,15 @@ class _SignUpState extends State<SignUp> {
                 ),
                 Padding(
                     child: TextFormField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       maxLines: 1,
                       obscureText: true,
                       validator: (String value){
                         if (value.isEmpty) {
                           return 'Veuillez saisir un mot de passe';
                         }
+                        else if (value.length < 4)
+                          return 'Mot de passe trop court (min:4)';
                         return null;
                       },
                       onSaved: (String value) => vm.password = value,

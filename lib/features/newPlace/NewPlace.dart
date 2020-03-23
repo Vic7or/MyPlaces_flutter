@@ -41,16 +41,16 @@ class NewPlaceState extends State<NewPlace>{
               ),
               padding: const EdgeInsets.only(bottom: 10)
           ),
-          _storedImage != null ?
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.green,
-              image: DecorationImage(image: FileImage(_storedImage), fit: BoxFit.cover)
-            ),
-          )
-          : SizedBox(width: 200, height: 200)
+          if (_storedImage != null)
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: FileImage(_storedImage), fit: BoxFit.cover)
+              ),
+            )
+          else
+            const SizedBox(width: 200, height: 200)
         ],
       ),
     );
