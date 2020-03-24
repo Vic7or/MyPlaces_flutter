@@ -46,6 +46,7 @@ class ProfilePageState extends State<ProfilePage> {
                 ),
                 FloatingActionButton(
                   backgroundColor: Theme.of(context).accentColor.withOpacity(0.7),
+                  heroTag: null,
                   child: Icon(Icons.photo_camera, color: Theme.of(context).primaryColorLight),
                   onPressed: () async {
                     final File image = await ImagePicker.pickImage(source: ImageSource.gallery);
