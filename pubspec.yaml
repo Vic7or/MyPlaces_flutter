@@ -51,6 +51,7 @@ flutter:
   assets:
     - assets/images/fireTower.jpg
     - assets/images/Logo_MP.png
+    - assets/images/pointeur_minilogo_map.png
     - assets/animations/Liquid_Loader.flr
   #  - images/a_dot_ham.jpeg
 

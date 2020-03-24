@@ -32,8 +32,8 @@ class NewPlaceState extends State<NewPlace>{
   void initState() {
     super.initState();
     BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(devicePixelRatio: 2.5, size: Size(5, 5)),
-      'assets/images/Logo_MP.png')
+      const ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/images/pointeur_minilogo_map.png')
       .then((BitmapDescriptor bd) {
         _pinLocationIcon = bd;
       }
@@ -68,7 +68,7 @@ class NewPlaceState extends State<NewPlace>{
           ),
           if (_storedImage != null)
             Container(
-              width: 200,
+              width: 300,
               height: 200,
               decoration: BoxDecoration(
                   image: DecorationImage(image: FileImage(_storedImage), fit: BoxFit.cover)
@@ -87,7 +87,8 @@ class NewPlaceState extends State<NewPlace>{
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         _createPictureWidget(context, vm),
-        _createLocalisationWidget(context, vm)
+        _createLocalisationWidget(context),
+        _createButtonsWidget(context, vm)
       ],
     );
   }
@@ -119,7 +120,7 @@ class NewPlaceState extends State<NewPlace>{
     );
   }
 
-  Widget _createLocalisationWidget(BuildContext context, AddPlaceViewModel vm) {
+  Widget _createLocalisationWidget(BuildContext context) {
     if (_position != null) {
       final CameraPosition _cameraPosition = CameraPosition(
         target: LatLng(_position.latitude, _position.longitude),
@@ -129,7 +130,7 @@ class NewPlaceState extends State<NewPlace>{
       );
       return Container(
         margin: const EdgeInsets.only(top: 10, bottom: 10),
-        width: 200,
+        width: 300,
         height: 200,
         child: GoogleMap(
           mapType: MapType.hybrid,
@@ -146,12 +147,37 @@ class NewPlaceState extends State<NewPlace>{
               );
             });
           },
-          myLocationEnabled: true,
+          myLocationEnabled: false,
           markers: _markers,
         ),
       );
     }
     else
-      return const SizedBox(width: 150, height: 150);
+      return const SizedBox(width: 200, height: 220);
+  }
+
+  Widget _createButtonsWidget(BuildContext context, AddPlaceViewModel vm) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        MaterialButton(
+          disabledColor: Colors.grey,
+          onPressed: _storedImage != null && _position != null ? () => vm.validateNewPlace(_storedImage, _position, context) : null,
+          child: Text('VALIDER', style: Theme.of(context).textTheme.subhead),
+          color: Colors.green.shade800,
+          splashColor: Theme.of(context).accentColor,
+        ),
+        MaterialButton(
+          onPressed: () => setState((){
+            _storedImage = null;
+            _position = null;
+          }),
+          child: Text('RESET', style: Theme.of(context).textTheme.subhead),
+          color: Theme.of(context).backgroundColor,
+          splashColor: Theme.of(context).accentColor,
+        )
+      ],
+    );
   }
 }

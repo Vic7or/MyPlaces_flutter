@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:myplaces/commons/LoadingDialog.dart';
 import 'package:redux/redux.dart';
 import '../../redux/Actions.dart';
 import '../../redux/AppState.dart';
@@ -13,8 +15,6 @@ class AddPlaceViewModel extends ViewModel {
     super.store = store;
   }
 
-  File _imageFile;
-
   static AddPlaceViewModel fromStore(Store<AppState> store) {
     return AddPlaceViewModel._internal(
         route: currentRoute(store.state),
@@ -22,4 +22,16 @@ class AddPlaceViewModel extends ViewModel {
         store: store
     );
   }
+
+  void validateNewPlace(File imageFile, Position position, BuildContext context) {
+    showDialog<Map<String, String>>(
+      context: context,
+      builder: null,
+    ).then((dynamic value){
+      final AddPlaceAction action = AddPlaceAction(imageFile, position, context);
+      showLoadingDialog(context);
+      store.dispatch(action);
+    });
+  }
+
 }
