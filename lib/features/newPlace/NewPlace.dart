@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myplaces/features/viewmodels/AddPlaceViewModel.dart';
 import 'package:myplaces/features/viewmodels/ViewModel.dart';
 import 'package:myplaces/redux/AppState.dart';
+import 'package:geolocator/geolocator.dart';
 
 class NewPlace extends StatefulWidget {
   @override
@@ -15,8 +18,27 @@ class NewPlace extends StatefulWidget {
 }
 
 class NewPlaceState extends State<NewPlace>{
+  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+  final double _camBearing = 0.0;
+  final double _camTilt = 0.0;
+  final double _camZoom = 18;
+  final Set<Marker> _markers = <Marker>{};
+  BitmapDescriptor _pinLocationIcon;
+  Position _position;
   File _storedImage;
   AddPlaceViewModel _vm;
+
+  @override
+  void initState() {
+    super.initState();
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(devicePixelRatio: 2.5, size: Size(5, 5)),
+      'assets/images/Logo_MP.png')
+      .then((BitmapDescriptor bd) {
+        _pinLocationIcon = bd;
+      }
+    );
+  }
 
   Widget _createPictureWidget(BuildContext context, AddPlaceViewModel vm) {
     return Container(
@@ -34,8 +56,11 @@ class NewPlaceState extends State<NewPlace>{
                   child: Icon(Icons.photo_camera, color: Theme.of(context).primaryColorLight),
                   onPressed: () async {
                     final File image = await ImagePicker.pickImage(source: ImageSource.camera);
+                    final Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+                    print(position);
                     setState(() {
                       _storedImage = image;
+                      _position = position;
                     });
                   }
               ),
@@ -61,7 +86,8 @@ class NewPlaceState extends State<NewPlace>{
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        _createPictureWidget(context, vm)
+        _createPictureWidget(context, vm),
+        _createLocalisationWidget(context, vm)
       ],
     );
   }
@@ -91,5 +117,41 @@ class NewPlaceState extends State<NewPlace>{
       ),
       onWillPop: () async => false,
     );
+  }
+
+  Widget _createLocalisationWidget(BuildContext context, AddPlaceViewModel vm) {
+    if (_position != null) {
+      final CameraPosition _cameraPosition = CameraPosition(
+        target: LatLng(_position.latitude, _position.longitude),
+        bearing: _camBearing,
+        tilt: _camTilt,
+        zoom: _camZoom,
+      );
+      return Container(
+        margin: const EdgeInsets.only(top: 10, bottom: 10),
+        width: 200,
+        height: 200,
+        child: GoogleMap(
+          mapType: MapType.hybrid,
+          initialCameraPosition: _cameraPosition,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+            setState(() {
+              _markers.add(
+                  Marker(
+                    markerId: MarkerId(UniqueKey().toString()),
+                    position: _cameraPosition.target,
+                    icon: _pinLocationIcon
+                  )
+              );
+            });
+          },
+          myLocationEnabled: true,
+          markers: _markers,
+        ),
+      );
+    }
+    else
+      return const SizedBox(width: 150, height: 150);
   }
 }
