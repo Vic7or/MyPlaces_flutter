@@ -9,9 +9,9 @@ import 'Localization.dart';
 import 'features/PlaceholderScreen.dart';
 import 'features/authentication/SignIn.dart';
 import 'features/authentication/SignUp.dart';
-import 'features/home/home_page.dart';
+import 'features/home/HomePage.dart';
 import 'features/newPlace/NewPlace.dart';
-import 'features/profile/profile_page.dart';
+import 'features/profile/ProfilePage.dart';
 import 'redux/AppState.dart';
 import 'redux/middlewares/AppMiddlewares.dart';
 import 'redux/reducers/AppReducer.dart';
@@ -76,7 +76,7 @@ class MyPlacesApp extends StatelessWidget {
           AppRoutes.signUp: (BuildContext context) => const SignUp(),
           AppRoutes.home: (BuildContext context) => const HomePage(),
           AppRoutes.favorite: (BuildContext context) => PlaceholderScreen(),
-          AppRoutes.profile: (BuildContext context) => const ProfilePage(),
+          AppRoutes.profile: (BuildContext context) => ProfilePage(),
           AppRoutes.addPlace: (BuildContext context) => NewPlace()
         },
         home: FutureBuilder<FirebaseUser>(
