@@ -174,9 +174,9 @@ class HomePage extends StatelessWidget {
                               onTap: () => vm.navigate(AppRoutes.favorite),
                               onLongPress: () => longPressActionsDialog(context),
                               title: Text(vm.store.state.places[i].title, style: Theme.of(context).textTheme.subhead),
-                              subtitle: Text(vm.store.state.places[i].subtitle, style: Theme.of(context).textTheme.body2),
+                              subtitle: Text(vm.store.state.places[i].description, style: Theme.of(context).textTheme.body2),
                               leading: CircleAvatar(backgroundImage: NetworkImage(vm.store.state.places[i].imageUrl)),
-                              trailing: vm.store.state.places[i].icon,
+                              trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
                             ),
                           );
                         }

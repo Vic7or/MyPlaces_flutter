@@ -70,9 +70,11 @@ class DisconnectAction {
 }
 
 class AddPlaceAction {
-  AddPlaceAction(this.imageFile, this.position, this.context);
+  AddPlaceAction(this.imageFile, this.position, this.name, this.description, this.context);
   File     imageFile;
   Position position;
+  String   name;
+  String   description;
   BuildContext context;
 
   @override

@@ -15,6 +15,9 @@ class AddPlaceViewModel extends ViewModel {
     super.store = store;
   }
 
+  String    name;
+  String    description;
+
   static AddPlaceViewModel fromStore(Store<AppState> store) {
     return AddPlaceViewModel._internal(
         route: currentRoute(store.state),
@@ -24,14 +27,8 @@ class AddPlaceViewModel extends ViewModel {
   }
 
   void validateNewPlace(File imageFile, Position position, BuildContext context) {
-    showDialog<Map<String, String>>(
-      context: context,
-      builder: null,
-    ).then((dynamic value){
-      final AddPlaceAction action = AddPlaceAction(imageFile, position, context);
-      showLoadingDialog(context);
+      final AddPlaceAction action = AddPlaceAction(imageFile, position, name, description, context);
       store.dispatch(action);
-    });
   }
 
 }
