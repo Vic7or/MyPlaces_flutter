@@ -65,7 +65,9 @@ Future<void> _signUp(Store<AppState> store, SignUpAction action, NextDispatcher 
         'uid': result.user.uid,
         'email': result.user.email,
         'firstName': firstName,
-        'lastName': lastName
+        'lastName': lastName,
+        'places': <dynamic>[],
+        'favoris': <dynamic>[]
       });
       Scaffold.of(action.context).showSnackBar(
         SnackBar(

@@ -37,23 +37,39 @@ void showTimeoutError(BuildContext context) {
   );
 }
 
-Future<void> _createPlace(Store<AppState> store, AddPlaceAction action, String uniqueId, String downloadUrl) async {
+void showSuccess(BuildContext context) {
+  Navigator.of(context).pop();
+  Scaffold.of(context).showSnackBar(
+      SnackBar(
+          duration: const Duration(seconds: 1),
+          backgroundColor: Colors.green.shade800,
+          content: Text('Nouvelle place ajoutée', style: Theme.of(context).textTheme.body2)
+      )
+  );
+}
+
+Future<void> _createPlace(Store<AppState> store, AddPlaceAction action, String downloadUrl) async {
   final Firestore         _fireStore = Firestore.instance;
   // CREATE A NEW PLACE DOCUMENT IN COLLECTION 'PLACES'
-    // TODO(victor): implement
-  // SET PLACE DOCUMENT REFERENCE FROM COLLECTION 'PLACES' TO USER ARRAY 'PLACES'
-  _fireStore.collection('users').where('uid', isEqualTo: store.state.user.uid).getDocuments()
-      .then((QuerySnapshot querySnap){
-        final DocumentReference ref = querySnap.documents.first.reference;
-        ref.updateData(<String, dynamic>{
-          'places' : FieldValue.arrayUnion(<DocumentReference>[null/*docref of new place*/])
-        })
-        .then((_){
-
-        })
-        .catchError((dynamic error) => showError(action.context));
-      })
-      .catchError((dynamic error) => showError(action.context));
+  _fireStore.collection('places').add(<String, dynamic>{
+    'title': action.name,
+    'description': action.description,
+    'imageUrl': downloadUrl,
+    'location': <String, double>{'lat': action.position.latitude, 'lng': action.position.longitude},
+    'uid': store.state.user.uid
+  })
+  .then((DocumentReference docRef){
+    // SET PLACE DOCUMENT REFERENCE FROM COLLECTION 'PLACES' TO USER ARRAY 'PLACES'
+    _fireStore.collection('users').where('uid', isEqualTo: store.state.user.uid).getDocuments()
+        .then((QuerySnapshot querySnap){
+      final DocumentReference ref = querySnap.documents.first.reference;
+      ref.updateData(<String, dynamic>{
+        'places' : FieldValue.arrayUnion(<DocumentReference>[docRef])
+      }).then((_){
+        showSuccess(action.context);
+      }).catchError((dynamic error) => showError(action.context));
+    }).catchError((dynamic error) => showError(action.context));
+  }).catchError((dynamic error) => showError(action.context));
 }
 
 Future<void> _addPlace(Store<AppState> store, AddPlaceAction action, NextDispatcher next) async {
@@ -70,9 +86,7 @@ Future<void> _addPlace(Store<AppState> store, AddPlaceAction action, NextDispatc
         snapshot.ref.getDownloadURL().timeout(_timeout)
             .then((dynamic value) {
               final String downloadUrl = value as String;
-              print('downloadUrl: $downloadUrl');
-              Navigator.of(action.context).pop();
-              //_createPlace(store, action, _uniqueId, downloadUrl);
+              _createPlace(store, action, downloadUrl);
         })
             .catchError((dynamic error) {
               storageUploadTask.cancel();
