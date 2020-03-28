@@ -40,11 +40,11 @@ class MyPlacesApp extends StatelessWidget {
     scaffoldBackgroundColor: Colors.orange,
     textTheme: TextTheme(
       body1: TextStyle(color: Colors.deepOrange.shade500, fontFamily: 'Orkney'),
-      body2: TextStyle(color: Colors.white, fontFamily: 'Orkney'),
+      body2: const TextStyle(color: Colors.white, fontFamily: 'Orkney'),
       subhead: TextStyle(color: Colors.white, fontFamily: 'Orkney', fontWeight: FontWeight.bold),
       title: TextStyle(color: Colors.deepOrange.shade800, fontFamily: 'Orkney', /*fontWeight: FontWeight.bold*/),
     ),
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: Colors.white),
     accentColor: Colors.yellow[500],
     pageTransitionsTheme: const PageTransitionsTheme(
         builders: <TargetPlatform, PageTransitionsBuilder>{

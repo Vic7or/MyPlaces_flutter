@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +65,8 @@ Future<void> _createPlace(Store<AppState> store, AddPlaceAction action, String d
       ref.updateData(<String, dynamic>{
         'places' : FieldValue.arrayUnion(<DocumentReference>[docRef])
       }).then((_){
+        final GetMPUserAction updateAction = GetMPUserAction();
+        store.dispatch(updateAction);
         showSuccess(action.context);
       }).catchError((dynamic error) => showError(action.context));
     }).catchError((dynamic error) => showError(action.context));

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:redux/redux.dart';
-
 import '../Actions.dart';
 
 final Reducer<FirebaseUser> authReducer = combineReducers<FirebaseUser>(<FirebaseUser Function(FirebaseUser, dynamic)>[
