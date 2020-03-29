@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:myplaces/model/MyPlacesUser.dart';
 
 class NavigateReplaceAction {
   NavigateReplaceAction(this.routeName);
@@ -64,5 +67,27 @@ class DisconnectAction {
   @override
   String toString() {
     return 'DisconnectAction';
+  }
+}
+
+class AddPlaceAction {
+  AddPlaceAction(this.imageFile, this.position, this.name, this.description, this.context);
+  File     imageFile;
+  Position position;
+  String   name;
+  String   description;
+  BuildContext context;
+
+  @override
+  String toString() {
+    return 'AddPlaceAction';
+  }
+}
+
+class GetMPUserAction {
+  MyPlacesUser user;
+  @override
+  String toString() {
+    return 'GetMPUserAction';
   }
 }

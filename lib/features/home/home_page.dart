@@ -136,6 +136,35 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _getBody(BuildContext context, HomeViewModel vm) {
+    if (vm.store.state.mpUser != null)
+      return ListView.separated(
+          separatorBuilder: (BuildContext context, int index) => Divider(
+            height: 0.0,
+            color: Theme.of(context).primaryColorDark.withOpacity(0.5),
+          ),
+          itemCount: vm.store.state.mpUser.places.length,
+          itemBuilder: (BuildContext context, int i){
+            return Dismissible(
+              confirmDismiss: (DismissDirection direction) => confirmDismiss(context),
+              background: createDismissibleBackground(context),
+              key: UniqueKey(),
+              child:
+              ListTile(
+                onTap: () => vm.navigate(AppRoutes.favorite),
+                onLongPress: () => longPressActionsDialog(context),
+                title: Text(vm.store.state.mpUser.places[i].title, style: Theme.of(context).textTheme.subhead),
+                subtitle: Text(vm.store.state.mpUser.places[i].description, style: Theme.of(context).textTheme.body2),
+                leading: CircleAvatar(backgroundImage: NetworkImage(vm.store.state.mpUser.places[i].imageUrl)),
+                trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
+              ),
+            );
+          }
+      );
+    else
+      return const SizedBox(width: 0,height: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,29 +187,7 @@ class HomePage extends StatelessWidget {
                         )
                     ),
                     //color: Theme.of(context).backgroundColor,
-                    child: ListView.separated(
-                        separatorBuilder: (BuildContext context, int index) => Divider(
-                          height: 0.0,
-                          color: Theme.of(context).primaryColorDark.withOpacity(0.5),
-                        ),
-                        itemCount: vm.store.state.places.length,
-                        itemBuilder: (BuildContext context, int i){
-                          return Dismissible(
-                            confirmDismiss: (DismissDirection direction) => confirmDismiss(context),
-                            background: createDismissibleBackground(context),
-                            key: UniqueKey(),
-                            child:
-                            ListTile(
-                              onTap: () => vm.navigate(AppRoutes.favorite),
-                              onLongPress: () => longPressActionsDialog(context),
-                              title: Text(vm.store.state.places[i].title, style: Theme.of(context).textTheme.subhead),
-                              subtitle: Text(vm.store.state.places[i].subtitle, style: Theme.of(context).textTheme.body2),
-                              leading: CircleAvatar(backgroundImage: NetworkImage(vm.store.state.places[i].imageUrl)),
-                              trailing: vm.store.state.places[i].icon,
-                            ),
-                          );
-                        }
-                    ),
+                    child: _getBody(context, vm),
                   )
                 );
               },
