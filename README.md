@@ -1,16 +1,11 @@
 # myplaces
 
-A new Flutter application.
+Une application en Flutter qui permet de prendre en photo des lieux et les stocker en ligne.
 
-## Getting Started
+## Instalation
 
-This project is a starting point for a Flutter application.
+Pour lancer ce projet vous devez tous d'abord installé Flutter disponible avec le lien suivant :
+https://flutter.dev/docs/get-started/install
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Une fois l'installation de Flutter terminé, Téléchargé le repository git et télécharger le fichier google-services.json sur teams.
+Copier le ficher  google-services.json dans le dosier android/app
