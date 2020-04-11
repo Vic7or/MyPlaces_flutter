@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "747745640732",
+    "firebase_url": "https://myplaces-70bb2.firebaseio.com",
+    "project_id": "myplaces-70bb2",
+    "storage_bucket": "myplaces-70bb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747745640732:android:39bd244c0f2e526c7bbad9",
+        "android_client_info": {
+          "package_name": "com.flutter.myplaces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747745640732-m18cc0dpphrqpfa21blvdcoii00c9g0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS8UTd-lkE78SlAs9QQDygVNTT_HgdPrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747745640732-m18cc0dpphrqpfa21blvdcoii00c9g0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
