@@ -71,7 +71,7 @@ class _SignUpState extends State<SignUp> {
   Widget createFormContainer(BuildContext context, AuthViewModel vm){
     final Container formContainer = Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 1.5,
+      height: MediaQuery.of(context).size.height / 1.8,
       child: Theme(
           data: ThemeData(
               hintColor: Colors.white70

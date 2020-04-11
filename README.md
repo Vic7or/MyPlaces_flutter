@@ -10,4 +10,4 @@ https://flutter.dev/docs/get-started/install
 Une fois l'installation de Flutter terminé, Téléchargé le repository git et télécharger le fichier google-services.json sur teams.
 Copier le ficher  google-services.json dans le dosier android/app.
 
-Vous pouvez lancer l'application.
+Vous pouvez lancer l'application ou télécharger sur le store diréctement.
