@@ -174,7 +174,7 @@ class HomePageState extends State<HomePage> {
                 onLongPress: () => longPressActionsDialog(context, data.ref, data.places[i].ref),
                 title: Text(data.places[i].title, style: Theme.of(context).textTheme.subhead),
                 subtitle: Text(data.places[i].description, style: Theme.of(context).textTheme.body2),
-                leading: CircleAvatar(backgroundImage: NetworkImage(data.places[i].imageUrl)),
+                leading: CircleAvatar(backgroundImage: NetworkImage(data.places[i].imageUrl),radius: 40,),
                 trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
               ),
             );

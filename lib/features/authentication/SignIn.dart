@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
     final Container formContainer = Container(
       //color: Colors.white,
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 1.8,
+      height: MediaQuery.of(context).size.height / 2.5,
       child: Theme(
           data: ThemeData(
               hintColor: Colors.white70
