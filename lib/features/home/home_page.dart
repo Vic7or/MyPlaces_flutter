@@ -129,7 +129,6 @@ class HomePageState extends State<HomePage> {
                             );
                           }
                       ),
-                      Text('PARTAGER', style: Theme.of(context).textTheme.subhead)
                     ],
                   ),
                   Column(
@@ -143,7 +142,6 @@ class HomePageState extends State<HomePage> {
                             _vm.store.dispatch(action);
                           }
                       ),
-                      Text('FAVORIS', style: Theme.of(context).textTheme.subhead)
                     ],
                   )
                 ],
@@ -173,7 +171,17 @@ class HomePageState extends State<HomePage> {
                 onTap: () => vm.navigate(AppRoutes.place, <String, dynamic>{'place': data.places[i]}),
                 onLongPress: () => longPressActionsDialog(context, data.ref, data.places[i].ref),
                 title: Text(data.places[i].title, style: Theme.of(context).textTheme.subhead),
-                subtitle: Text(data.places[i].description, style: Theme.of(context).textTheme.body2),
+                subtitle: Container(
+                  padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                  child: Text(
+                    vm.store.state.mpUser.places[i].description,
+                    style: Theme.of(context).textTheme.body2,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    softWrap: false,
+                  ),
+                ),
                 leading: CircleAvatar(backgroundImage: NetworkImage(data.places[i].imageUrl),radius: 40,),
                 trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
               ),

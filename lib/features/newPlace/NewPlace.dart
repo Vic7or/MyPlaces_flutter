@@ -165,6 +165,7 @@ class NewPlaceState extends State<NewPlace>{
         children: <Widget>[
           Padding(
               child: TextFormField(
+                maxLength : 29,
                 style: const TextStyle(color: Colors.white),
                 maxLines: 1,
                 obscureText: false,

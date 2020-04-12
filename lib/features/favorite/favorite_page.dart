@@ -62,7 +62,6 @@ class FavoritePageState extends State<FavoritePage> {
                               );
                             }
                         ),
-                        Text('PARTAGER', style: Theme.of(context).textTheme.subhead)
                       ],
                     ),
                     Column(
@@ -76,7 +75,6 @@ class FavoritePageState extends State<FavoritePage> {
                               _vm.store.dispatch(action);
                             }
                         ),
-                        Text('RETIRER FAVORIS', style: Theme.of(context).textTheme.subhead)
                       ],
                     )
                   ],
@@ -97,7 +95,17 @@ class FavoritePageState extends State<FavoritePage> {
             onTap: () => vm.navigate(AppRoutes.place, <String, dynamic>{'place': data.favoris[i]}),
             onLongPress: () => longPressActionsDialog(context, data.ref, data.favoris[i].ref),
             title: Text(data.favoris[i].title, style: Theme.of(context).textTheme.subhead),
-            subtitle: Text(data.favoris[i].description, style: Theme.of(context).textTheme.body2),
+            subtitle: Container(
+                  padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                  child: Text(
+                   data.favoris[i].description,
+                    style: Theme.of(context).textTheme.body2,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    softWrap: false,
+                  ),
+                ),
             leading: CircleAvatar(backgroundImage: NetworkImage(data.favoris[i].imageUrl)),
             trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
           );
