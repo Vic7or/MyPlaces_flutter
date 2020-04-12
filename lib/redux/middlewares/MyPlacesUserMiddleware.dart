@@ -16,7 +16,6 @@ List<Middleware<AppState>> createMyPlacesUserMiddlewares() {
 
 
 Future<List<Place>> _getPlacesFromDocRef(List<dynamic> refList) async {
-  final Firestore _fireStore = Firestore.instance;
   final List<Place> ret = <Place>[];
   DocumentSnapshot docSnap;
   Map<String, dynamic> data;

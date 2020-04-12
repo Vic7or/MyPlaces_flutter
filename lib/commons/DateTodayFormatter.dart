@@ -11,7 +11,7 @@ class DateTodayFormatter {
   }
 
   DateTime _getTodayMidnight() {
-    final now = DateTime.now();
+    final DateTime now = DateTime.now();
     return now.subtract(Duration(hours: now.hour,
         minutes: now.minute,
         seconds: now.second,
@@ -20,14 +20,14 @@ class DateTodayFormatter {
 
   bool _checkIfToday() =>
       _dateTime.isAfter(_todayMidnight) &&
-          _dateTime.isBefore(_todayMidnight.add(Duration(days: 1)));
+          _dateTime.isBefore(_todayMidnight.add(const Duration(days: 1)));
 
   bool _checkIfTomorrow() =>
-      _dateTime.isAfter(_todayMidnight.add(Duration(days: 1))) &&
-          _dateTime.isBefore(_todayMidnight.add(Duration(days: 2)));
+      _dateTime.isAfter(_todayMidnight.add(const Duration(days: 1))) &&
+          _dateTime.isBefore(_todayMidnight.add(const Duration(days: 2)));
 
   bool _checkIfYesterday() =>
-      _dateTime.isAfter(_todayMidnight.subtract(Duration(days: 1))) &&
+      _dateTime.isAfter(_todayMidnight.subtract(const Duration(days: 1))) &&
           _dateTime.isBefore(_todayMidnight);
 
   String format(BuildContext context) {

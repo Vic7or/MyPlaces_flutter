@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:myplaces/commons/LoadingDialog.dart';
 import 'package:redux/redux.dart';
 import '../../redux/Actions.dart';
 import '../../redux/AppState.dart';

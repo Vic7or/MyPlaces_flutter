@@ -1,5 +1,4 @@
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:myplaces/features/viewmodels/AuthViewModel.dart';
@@ -12,8 +11,8 @@ class PlaceholderScreen extends StatelessWidget {
 
 
 
-  Widget _getBody() => Center(
-    child: Text("Placeholder Screen"),
+  Widget _getBody() => const Center(
+    child: Text('Placeholder Screen'),
   );
 
   @override

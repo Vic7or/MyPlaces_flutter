@@ -160,7 +160,7 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                     child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         maxLines: 1,
                         validator: (String value){
                           if (value.isEmpty) {

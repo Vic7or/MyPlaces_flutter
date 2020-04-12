@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/src/store.dart';
 import '../../AppRoutes.dart';
 import '../../redux/AppState.dart';
 import '../viewmodels/MenuViewModel.dart';
@@ -37,7 +38,7 @@ class BottomNavBar extends StatelessWidget {
       shape: const CircularNotchedRectangle(),
       child: StoreConnector<AppState, MenuViewModel>(
         distinct: true,
-        converter: (store) => MenuViewModel.fromStore(store),
+        converter: (Store<AppState> store) => MenuViewModel.fromStore(store),
         builder: (BuildContext context, MenuViewModel vm) => Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,

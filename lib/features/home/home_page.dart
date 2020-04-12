@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:myplaces/AppRoutes.dart';
-import 'package:myplaces/features/viewmodels/AuthViewModel.dart';
 import 'package:myplaces/features/viewmodels/HomeViewModel.dart';
 import 'package:myplaces/features/viewmodels/ViewModel.dart';
 import 'package:myplaces/redux/AppState.dart';
 import 'package:redux/redux.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import '../menu/MainMenu.dart';
 
 class HomePage extends StatelessWidget {
