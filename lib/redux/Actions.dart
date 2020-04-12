@@ -111,3 +111,11 @@ class UnFavoriteAction {
   Function update;
   BuildContext context;
 }
+
+class DelPlaceAction {
+  DelPlaceAction(this.place, this.user, this.context, this.update);
+  DocumentReference place;
+  DocumentReference user;
+  Function update;
+  BuildContext context;
+}

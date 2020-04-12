@@ -61,7 +61,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Future<bool> confirmDismiss(BuildContext context) async {
+  Future<bool> confirmDismiss(BuildContext context, DocumentReference userRef, DocumentReference placeRef) async {
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -73,7 +73,11 @@ class HomePageState extends State<HomePage> {
           ),
           actions: <Widget>[
             FlatButton(
-              onPressed: () => Navigator.of(context).pop(true),
+              onPressed: () { 
+                final DelPlaceAction action = DelPlaceAction(placeRef, userRef, context, update);
+                _vm.store.dispatch(action);
+                Navigator.of(context).pop(true);
+              },
               child: Text(
                 'supprimer',
                 style: Theme.of(context).textTheme.title,
@@ -161,7 +165,7 @@ class HomePageState extends State<HomePage> {
           itemCount: data.places.length,
           itemBuilder: (BuildContext context, int i){
             return Dismissible(
-              confirmDismiss: (DismissDirection direction) => confirmDismiss(context),
+              confirmDismiss: (DismissDirection direction) => confirmDismiss(context, data.ref, data.places[i].ref),
               background: createDismissibleBackground(context),
               key: UniqueKey(),
               child:
