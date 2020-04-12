@@ -1,4 +1,3 @@
-import 'package:myplaces/AppRoutes.dart';
 import 'package:redux/redux.dart';
 import '../../main.dart';
 import '../Actions.dart';

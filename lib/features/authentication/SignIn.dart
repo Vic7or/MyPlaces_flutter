@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
                 Padding(
                     child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         maxLines: 1,
                         validator: (String value){
                           if (value.isEmpty) {
@@ -130,7 +130,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 Padding(
                     child: TextFormField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       maxLines: 1,
                       obscureText: true,
                       validator: (String value){

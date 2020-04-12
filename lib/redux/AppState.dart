@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myplaces/model/MyPlacesUser.dart';
-import 'package:myplaces/model/Place.dart';
 import 'package:meta/meta.dart';
 
 @immutable

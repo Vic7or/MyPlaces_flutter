@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class InfoCard extends StatelessWidget {
 
-  InfoCard({
+  const InfoCard({
     @required this.text,
     @required this.icon,
-    this.onPressed,
+    @required this.onPressed,
   });
 
   final String text;
   final IconData icon;
-  Function onPressed;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {

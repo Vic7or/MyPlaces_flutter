@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
                             :  */NetworkImage('https://gyazo.com/21dc9e7aa1af42d4d57fcc9f2cb0527d'),
                         fit: BoxFit.cover),
                     borderRadius: const BorderRadius.all(Radius.circular(45.0)),
-                    boxShadow: [BoxShadow(blurRadius: 7.0, color: Colors.black)]),
+                    boxShadow: <BoxShadow>[BoxShadow(blurRadius: 7.0, color: Colors.black)]),
               ),
             ),
             Text(
@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                 fontFamily: 'Pacifico',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
               width: 200,
               child: Divider(
@@ -51,10 +51,12 @@ class ProfilePage extends StatelessWidget {
             InfoCard(
               text: vm.store.state.user.email,
               icon: Icons.email,
+              onPressed: null,
             ),
             InfoCard(
               text: 'J aime lyon',
               icon: Icons.favorite,
+              onPressed: null,
             ),
           ],
         ),
