@@ -50,7 +50,7 @@ class ProfilePageState extends State<ProfilePage> {
                 decoration: BoxDecoration(
                     color: Colors.red,
                     image: DecorationImage(
-                        image: (data.profilePicture != null) ?
+                        image: (data != null && data.profilePicture != null) ?
                         NetworkImage(data.profilePicture) :
                         Image.asset('assets/images/placeholder.png').image,
                         fit: BoxFit.cover),
