@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget createDismissibleBackground(BuildContext context){
+  Widget createDismissibleBackground(BuildContext context) {
     return Container(
         child: Column(
           children: <Widget>[
@@ -36,162 +36,164 @@ class HomePage extends StatelessWidget {
             createSeparator(context)
           ],
         ),
-        color: Colors.red.shade800//Theme.of(context).primaryColorLight
-    );
+        color: Colors.red.shade800 //Theme.of(context).primaryColorLight
+        );
   }
 
   Future<bool> confirmDismiss(BuildContext context) async {
     return await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Confirmation'),
-          content: Text(
-              'Voulez-vous vraiment supprimer cet élément ?',
-              style: Theme.of(context).textTheme.body1
-          ),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text(
-                'supprimer',
-                style: Theme.of(context).textTheme.title,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Confirmation'),
+            content: Text('Voulez-vous vraiment supprimer cet élément ?',
+                style: Theme.of(context).textTheme.body1),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text(
+                    'supprimer',
+                    style: Theme.of(context).textTheme.title,
+                  )),
+              FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(
+                  'annuler',
+                  style: Theme.of(context).textTheme.title,
+                ),
               )
-            ),
-        FlatButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text(
-                'annuler',
-                style: Theme.of(context).textTheme.title,
-              ),
-            )
-          ],
-        );
-      }
-    );
+            ],
+          );
+        });
   }
 
   void longPressActionsDialog(BuildContext _context) {
     showDialog<dynamic>(
-      context: _context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          content: Container(
-            height: MediaQuery.of(context).size.height / 8,
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: const BorderRadius.all(Radius.circular(20))
-            ),
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                          icon: Icon(Icons.share, size: 40, color: Theme.of(context).primaryColorLight),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            Scaffold.of(_context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Place partagée'),
-                                  duration: Duration(seconds: 1),
-                                )
-                            );
-                          }
-                      ),
-                      Text('PARTAGER', style: Theme.of(context).textTheme.subhead)
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                          icon: Icon(Icons.favorite, size: 40, color: Theme.of(context).primaryColorLight),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            Scaffold.of(_context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Ajouté aux favoris'),
-                                  duration: Duration(seconds: 1),
-                                )
-                            );
-                          }
-                      ),
-                      Text('FAVORIS', style: Theme.of(context).textTheme.subhead)
-                    ],
-                  )
-                ],
+        context: _context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            content: Container(
+              height: MediaQuery.of(context).size.height / 8,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(Icons.share,
+                                size: 40,
+                                color: Theme.of(context).primaryColorLight),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Scaffold.of(_context).showSnackBar(const SnackBar(
+                                content: Text('Place partagée'),
+                                duration: Duration(seconds: 1),
+                              ));
+                            }),
+                        Text('PARTAGER',
+                            style: Theme.of(context).textTheme.subhead)
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(Icons.favorite,
+                                size: 40,
+                                color: Theme.of(context).primaryColorLight),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Scaffold.of(_context).showSnackBar(const SnackBar(
+                                content: Text('Ajouté aux favoris'),
+                                duration: Duration(seconds: 1),
+                              ));
+                            }),
+                        Text('FAVORIS',
+                            style: Theme.of(context).textTheme.subhead)
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 
   Widget _getBody(BuildContext context, HomeViewModel vm) {
     if (vm.store.state.mpUser != null)
       return ListView.separated(
           separatorBuilder: (BuildContext context, int index) => Divider(
-            height: 0.0,
-            color: Theme.of(context).primaryColorDark.withOpacity(0.5),
-          ),
+                height: 0.0,
+                color: Theme.of(context).primaryColorDark.withOpacity(0.5),
+              ),
           itemCount: vm.store.state.mpUser.places.length,
-          itemBuilder: (BuildContext context, int i){
+          itemBuilder: (BuildContext context, int i) {
             return Dismissible(
-              confirmDismiss: (DismissDirection direction) => confirmDismiss(context),
+              confirmDismiss: (DismissDirection direction) =>
+                  confirmDismiss(context),
               background: createDismissibleBackground(context),
               key: UniqueKey(),
-              child:
-              ListTile(
+              child: ListTile(
                 onTap: () => vm.navigate(AppRoutes.favorite),
                 onLongPress: () => longPressActionsDialog(context),
-                title: Text(vm.store.state.mpUser.places[i].title, style: Theme.of(context).textTheme.subhead),
-                subtitle: Text(vm.store.state.mpUser.places[i].description, style: Theme.of(context).textTheme.body2),
-                leading: CircleAvatar(backgroundImage: NetworkImage(vm.store.state.mpUser.places[i].imageUrl)),
+                title: Text(vm.store.state.mpUser.places[i].title,
+                    style: Theme.of(context).textTheme.subhead),
+                subtitle: Container(
+                  padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                  child: Text(
+                    vm.store.state.mpUser.places[i].description,
+                    style: Theme.of(context).textTheme.body2,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    softWrap: false,
+                  ),
+                ),
+                leading: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(vm.store.state.mpUser.places[i].imageUrl),
+                  radius: 40,
+                ),
                 trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
               ),
             );
-          }
-      );
+          });
     else
-      return const SizedBox(width: 0,height: 0);
+      return const SizedBox(width: 0, height: 0);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Builder(
-          builder: (BuildContext context) {
-            return StoreConnector<AppState, ViewModel>(
-              distinct: true,
-              converter: (Store<AppState> store) => HomeViewModel.fromStore(store),
-              builder: (BuildContext context, ViewModel vm){
-                return MainMenu(
-                  Container(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Theme.of(context).scaffoldBackgroundColor,
-                            Theme.of(context).backgroundColor
-                          ]
-                        )
-                    ),
-                    //color: Theme.of(context).backgroundColor,
-                    child: _getBody(context, vm),
-                  )
-                );
-              },
-            );
-          }
-      ),
+      body: Builder(builder: (BuildContext context) {
+        return StoreConnector<AppState, ViewModel>(
+          distinct: true,
+          converter: (Store<AppState> store) => HomeViewModel.fromStore(store),
+          builder: (BuildContext context, ViewModel vm) {
+            return MainMenu(Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: <Color>[
+                    Theme.of(context).scaffoldBackgroundColor,
+                    Theme.of(context).backgroundColor
+                  ])),
+              //color: Theme.of(context).backgroundColor,
+              child: _getBody(context, vm),
+            ));
+          },
+        );
+      }),
     );
   }
 }

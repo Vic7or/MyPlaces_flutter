@@ -33,15 +33,15 @@ class MyPlacesApp extends StatelessWidget {
   );
 
   final ThemeData theme = ThemeData(
-    backgroundColor: Colors.deepOrange.shade800,
-    primaryColor: Colors.orange,
+    backgroundColor: const Color.fromRGBO(190, 90, 112, 1),
+    primaryColor: const Color.fromRGBO(107, 65, 95, 1),
     primaryColorLight: Colors.white,
     primaryColorDark: Colors.black,
-    scaffoldBackgroundColor: Colors.orange,
+    scaffoldBackgroundColor: const Color.fromRGBO(107, 65, 95, 1),
     textTheme: TextTheme(
       body1: TextStyle(color: Colors.deepOrange.shade500, fontFamily: 'Orkney'),
-      body2: const TextStyle(color: Colors.white, fontFamily: 'Orkney'),
-      subhead: TextStyle(color: Colors.white, fontFamily: 'Orkney', fontWeight: FontWeight.bold),
+      body2: const TextStyle(color: Color.fromRGBO(230, 230, 230, 1), fontFamily: 'Orkney',fontSize: 12),
+      subhead: TextStyle(color: Colors.white, fontFamily: 'Orkney', fontWeight: FontWeight.bold, fontSize: 25),
       title: TextStyle(color: Colors.deepOrange.shade800, fontFamily: 'Orkney', /*fontWeight: FontWeight.bold*/),
     ),
     iconTheme: const IconThemeData(color: Colors.white),

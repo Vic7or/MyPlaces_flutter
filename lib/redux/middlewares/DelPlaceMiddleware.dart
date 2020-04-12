@@ -4,7 +4,7 @@ import 'package:redux/redux.dart';
 import '../Actions.dart';
 import '../AppState.dart';
 
-List<Middleware<AppState>> createAddPlaceMiddlewares() {
+List<Middleware<AppState>> createdelPlaceMiddlewares() {
   return <Middleware<AppState>>[
     TypedMiddleware<AppState, AddPlaceAction>(_delPlace),
   ];
