@@ -28,7 +28,7 @@ Project is created with:
 * Dart version : 2.7.2
 	
 ## Setup
-To run this project, install it locally using flutter:
+To run this project, first clone it wherever you want then install it locally using flutter:
 
 ```
 $ cd ../MyPlaces_flutter
