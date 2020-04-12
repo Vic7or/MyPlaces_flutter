@@ -7,7 +7,7 @@ import 'package:myplaces/redux/Actions.dart';
 import 'package:redux/redux.dart';
 import 'AppRoutes.dart';
 import 'Localization.dart';
-import 'features/PlaceholderScreen.dart';
+import 'features/favorite/favorite_page.dart';
 import 'features/authentication/SignIn.dart';
 import 'features/authentication/SignUp.dart';
 import 'features/home/home_page.dart';
@@ -76,7 +76,7 @@ class MyPlacesApp extends StatelessWidget {
           AppRoutes.signIn: (BuildContext context) => const SignIn(),
           AppRoutes.signUp: (BuildContext context) => const SignUp(),
           AppRoutes.home: (BuildContext context) => const HomePage(),
-          AppRoutes.favorite: (BuildContext context) => PlaceholderScreen(),
+          AppRoutes.favorite: (BuildContext context) => FavoritePage(),
           AppRoutes.profile: (BuildContext context) => const ProfilePage(),
           AppRoutes.addPlace: (BuildContext context) => NewPlace(),
           AppRoutes.place: (BuildContext context) => PlacePage(),

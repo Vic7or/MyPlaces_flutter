@@ -26,6 +26,7 @@ Future<List<Place>> _getPlacesFromDocRef(List<dynamic> refList) async {
       Position(longitude: data['location']['lng'], latitude: data['location']['lat']),
       data['title'],
       data['description'],
+      docSnap.reference
     );
     ret.add(place);
   }
@@ -36,7 +37,8 @@ Future<void> _getMyPlaceUser(Store<AppState> store, GetMPUserAction action, Next
   final Firestore _fireStore = Firestore.instance;
   _fireStore.collection('users').where('uid', isEqualTo: store.state.user.uid).getDocuments()
       .then((QuerySnapshot querySnap) async {
-        final Map<String, dynamic> data = querySnap.documents.first.data;
+        final DocumentSnapshot docSnap =  querySnap.documents.first;
+        final Map<String, dynamic> data = docSnap.data;
         final List<Place>  places = await _getPlacesFromDocRef(data['places']);
         final List<Place>  favoris = await _getPlacesFromDocRef(data['favoris']);
         final MyPlacesUser mpUser = MyPlacesUser(
@@ -46,6 +48,7 @@ Future<void> _getMyPlaceUser(Store<AppState> store, GetMPUserAction action, Next
           data['uid'],
           places,
           favoris,
+          docSnap.reference
         );
         action.user = mpUser;
         next(action);

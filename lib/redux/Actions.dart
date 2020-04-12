@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:myplaces/model/MyPlacesUser.dart';
+import 'package:myplaces/model/Place.dart';
 
 class NavigateReplaceAction {
   NavigateReplaceAction(this.routeName);
@@ -93,4 +95,20 @@ class GetMPUserAction {
   String toString() {
     return 'GetMPUserAction';
   }
+}
+
+class FavoriteAction {
+  FavoriteAction(this.place, this.user, this.context, this.update);
+  DocumentReference place;
+  DocumentReference user;
+  Function update;
+  BuildContext context;
+}
+
+class UnFavoriteAction {
+  UnFavoriteAction(this.place, this.user, this.context, this.update);
+  DocumentReference place;
+  DocumentReference user;
+  Function update;
+  BuildContext context;
 }

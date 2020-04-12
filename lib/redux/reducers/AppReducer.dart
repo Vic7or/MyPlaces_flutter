@@ -11,7 +11,7 @@ AppState appReducer(AppState state, dynamic action) {
     user: authReducer(state.user, action),
     mpUser: myPlacesUserReducer(state.mpUser, action)
   );
-  print('old state before $action => '+state.toString());
-  print('new state after $action => '+newState.toString());
+  //print('old state before $action => '+state.toString());
+  //print('new state after $action => '+newState.toString());
   return newState;
 }
