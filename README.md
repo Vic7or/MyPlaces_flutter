@@ -6,7 +6,7 @@
 
 ## General info
 
-A new Flutter application.
+MyPlaces is a student application which allow you to share places with a photo and gps localization.
 
 ## Getting Started
 
@@ -24,9 +24,8 @@ samples, guidance on mobile development, and a full API reference.
 ## Technologies
 
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+* Flutter version : v1.12.13+hotfix.9
+* Dart version : 2.7.2
 	
 ## Setup
 To run this project, install it locally using npm:
