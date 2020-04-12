@@ -22,8 +22,8 @@ class ProfilePage extends StatefulWidget {
 
 class ProfilePageState extends State<ProfilePage> {
   File _storedImage;
-
-  Widget _test(ViewModel vm) {
+  
+  Widget _test(ProfileViewModel vm) {
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -52,6 +52,7 @@ class ProfilePageState extends State<ProfilePage> {
                     final File image = await ImagePicker.pickImage(source: ImageSource.gallery);
                     setState(() {
                       _storedImage = image;
+                      uploadPicture(_storedImage, vm.store.state.user.uid);
                     });
                   }
                 ),                

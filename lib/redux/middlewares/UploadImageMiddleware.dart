@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:myplaces/commons/LoadingDialog.dart';
@@ -10,7 +9,7 @@ import '../AppState.dart';
 
 List<Middleware<AppState>> createUploadProfilePicMiddlewares() {
   return <Middleware<AppState>>[
-    TypedMiddleware<AppState, UploadProfilePic>(_uploadProfilePic),
+    TypedMiddleware<AppState, UploadPictureAction>(_uploadProfilePic),
   ];
 }
 
@@ -36,11 +35,10 @@ void showTimeoutError(BuildContext context) {
   );
 }
 
-Future<void> _uploadProfilePic(Store<AppState> store, UploadProfilePic action, NextDispatcher next) async {
+Future<void> _uploadProfilePic(Store<AppState> store, UploadPictureAction action, NextDispatcher next) async {
     showLoadingDialog(action.context);
     const Duration          _timeout = Duration(seconds: 10);
-    final String            _uniqueId = UniqueKey().toString();
-    final String            _storagePath = store.state.user.uid+'/'+_uniqueId;
+    final String            _storagePath = store.state.user.uid+'/profilePictureUrl';
     final FirebaseStorage   _fireStorage = FirebaseStorage.instance;
     final StorageReference  storageReference = _fireStorage.ref().child(_storagePath);
     final StorageUploadTask storageUploadTask = storageReference.putFile(action.imageFile);
@@ -50,14 +48,14 @@ Future<void> _uploadProfilePic(Store<AppState> store, UploadProfilePic action, N
         snapshot.ref.getDownloadURL().timeout(_timeout)
             .then((dynamic value) {
               final String downloadUrl = value as String;
+              next(downloadUrl);
               print('downloadUrl: $downloadUrl');
               Navigator.of(action.context).pop();
-              //_createPlace(store, action, _uniqueId, downloadUrl);
-        })
+            })
             .catchError((dynamic error) {
               storageUploadTask.cancel();
               showError(action.context);
-        });
+            });
       }
       else {
         storageUploadTask.cancel();

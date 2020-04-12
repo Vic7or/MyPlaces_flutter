@@ -69,14 +69,14 @@ class DisconnectAction {
   }
 }
 
-class UploadProfilePic {
-  UploadProfilePic(this.imageFile, this.user);
+class UploadPictureAction {
+  UploadPictureAction(this.imageFile, this.user);
   FirebaseUser user;
   File imageFile;
+  String downloadUrl;
   BuildContext context;
-
   @override
   String toString() {
-    return 'UploadProfilePic';
+    return 'UploadPictureAction';
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import '../../redux/Actions.dart';
@@ -14,6 +17,11 @@ class ProfileViewModel extends ViewModel {
 
 String name;
 String firstName;
+
+  void uploadPicture(File imageFile, FirebaseUser user){
+      final UploadPictureAction action = UploadPictureAction(imageFile, user);
+      store.dispatch(action);
+    }
 
   static ProfileViewModel fromStore(Store<AppState> store) {
     return ProfileViewModel._internal(
