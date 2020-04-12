@@ -28,10 +28,11 @@ Project is created with:
 * Dart version : 2.7.2
 	
 ## Setup
-To run this project, install it locally using npm:
+To run this project, install it locally using flutter:
 
 ```
-$ cd ../lorem
-$ npm install
-$ npm start
+$ cd ../MyPlaces_flutter
+$ flutter doctor
+$ flutter packages get
+$ flutter run
 ```
