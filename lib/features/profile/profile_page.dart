@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:myplaces/features/viewmodels/ProfileViewModel.dart';
 import 'package:myplaces/features/viewmodels/ViewModel.dart';
 import 'package:myplaces/model/MyPlacesUser.dart';
+import 'package:myplaces/redux/Actions.dart';
 import 'package:myplaces/redux/AppState.dart';
 import 'package:redux/redux.dart';
 import '../../commons/InfoCard.dart';
@@ -112,6 +113,10 @@ class ProfilePageState extends State<ProfilePage> {
             builder: (BuildContext context, ViewModel vm) {
               _context = context;
               _vm = vm;
+              if (data == null || data != vm.store.state.mpUser) {
+                final GetMPUserAction action = GetMPUserAction(update);
+                vm.store.dispatch(action);
+              }
               return MainMenu(_test(vm));
             },
           );
