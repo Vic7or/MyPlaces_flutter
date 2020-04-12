@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:myplaces/features/viewmodels/AuthViewModel.dart';
+import 'package:myplaces/features/viewmodels/HomeViewModel.dart';
 import 'package:myplaces/features/viewmodels/ViewModel.dart';
 import 'package:myplaces/model/MyPlacesUser.dart';
 import 'package:myplaces/redux/Actions.dart';
@@ -119,7 +119,7 @@ class FavoritePageState extends State<FavoritePage> {
         builder: (BuildContext context) {
           return StoreConnector<AppState, ViewModel>(
             distinct: true,
-            converter: (Store<AppState> store) => AuthViewModel.fromStore(store),
+            converter: (Store<AppState> store) => HomeViewModel.fromStore(store),
             builder: (BuildContext context, ViewModel vm) {
               _vm = vm;
               if (data == null || data != vm.store.state.mpUser) {
