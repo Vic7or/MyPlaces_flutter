@@ -23,7 +23,7 @@ class MainMenu extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: Theme.of(context).accentColor.withOpacity(0.7),
         onPressed: () => StoreProvider.of<AppState>(context)
-            .dispatch(NavigatePushAction(AppRoutes.addPlace)),
+            .dispatch(NavigatePushAction(AppRoutes.addPlace, null)),
         tooltip: 'Take a new place',
         child: Icon(Icons.add_a_photo),
       ),

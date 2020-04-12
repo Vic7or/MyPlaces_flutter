@@ -3,7 +3,7 @@ import '../../redux/AppState.dart';
 
 abstract class ViewModel {
   List<String> route;
-  Function(String) navigate;
+  Function(String, Map<String, dynamic>) navigate;
   Store<AppState> store;
   @override
   bool operator ==(Object other) {

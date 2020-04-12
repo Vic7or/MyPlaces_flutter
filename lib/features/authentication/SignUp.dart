@@ -211,8 +211,8 @@ class _SignUpState extends State<SignUp> {
                         if (value.isEmpty) {
                           return 'Veuillez saisir un mot de passe';
                         }
-                        else if (value.length < 4)
-                          return 'Mot de passe trop court (min:4)';
+                        else if (value.length < 8)
+                          return 'Mot de passe trop court (min:8)';
                         return null;
                       },
                       onSaved: (String value) => vm.password = value,
@@ -262,7 +262,7 @@ class _SignUpState extends State<SignUp> {
                           fontFamily: 'Orkney'
                       ),
                     ),
-                    onPressed: () => vm.navigate(AppRoutes.signIn)
+                    onPressed: () => vm.navigate(AppRoutes.signIn, null)
                 ),
               ],
             ),

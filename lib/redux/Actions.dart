@@ -15,8 +15,9 @@ class NavigateReplaceAction {
 }
 
 class NavigatePushAction {
-  NavigatePushAction(this.routeName);
+  NavigatePushAction(this.routeName, this.args);
   final String routeName;
+  final Map<String, dynamic> args;
   @override
   String toString() {
     return 'NavigatePushAction{routeName: $routeName}';
@@ -85,7 +86,9 @@ class AddPlaceAction {
 }
 
 class GetMPUserAction {
+  GetMPUserAction(this.update);
   MyPlacesUser user;
+  Function update;
   @override
   String toString() {
     return 'GetMPUserAction';

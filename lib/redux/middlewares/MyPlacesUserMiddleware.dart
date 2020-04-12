@@ -13,8 +13,6 @@ List<Middleware<AppState>> createMyPlacesUserMiddlewares() {
   ];
 }
 
-
-
 Future<List<Place>> _getPlacesFromDocRef(List<dynamic> refList) async {
   final Firestore _fireStore = Firestore.instance;
   final List<Place> ret = <Place>[];
@@ -51,5 +49,7 @@ Future<void> _getMyPlaceUser(Store<AppState> store, GetMPUserAction action, Next
         );
         action.user = mpUser;
         next(action);
+        if (action.update != null)
+          action.update();
   });
 }

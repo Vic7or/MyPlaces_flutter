@@ -7,7 +7,7 @@ import 'ViewModel.dart';
 
 class MenuViewModel extends ViewModel {
 
-  MenuViewModel._internal({@required List<String> route, @required Function(String) navigate, @required Store<AppState> store}){
+  MenuViewModel._internal({@required List<String> route, @required Function(String, Map<String, dynamic>) navigate, @required Store<AppState> store}){
     super.route = route;
     super.navigate = navigate;
     super.store = store;
@@ -19,7 +19,7 @@ class MenuViewModel extends ViewModel {
   static MenuViewModel fromStore(Store<AppState> store) {
     return MenuViewModel._internal(
         route: currentRoute(store.state),
-        navigate: (String routeName) => store.dispatch(NavigateReplaceAction(routeName)),
+        navigate: (String routeName, Map<String, dynamic> args) => store.dispatch(NavigateReplaceAction(routeName)),
         store: store
     );
   }

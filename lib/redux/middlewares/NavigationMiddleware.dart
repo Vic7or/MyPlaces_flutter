@@ -1,3 +1,4 @@
+import 'package:myplaces/AppRoutes.dart';
 import 'package:redux/redux.dart';
 import '../../main.dart';
 import '../Actions.dart';
@@ -20,10 +21,10 @@ void _navigateReplace(Store<AppState> store, dynamic action, NextDispatcher next
   next(action);
 }
 
-void _navigate(Store<AppState> store, dynamic action, NextDispatcher next) {
-  final String routeName = (action as NavigatePushAction).routeName;
+void _navigate(Store<AppState> store, NavigatePushAction action, NextDispatcher next) {
+  final String routeName = action.routeName;
   if (store.state.route.isEmpty || store.state.route.last != routeName) {
-    navigatorKey.currentState.pushNamed(routeName);
+    navigatorKey.currentState.pushNamed(routeName, arguments: action.args);
   }
   next(action);
 }

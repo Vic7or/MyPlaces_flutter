@@ -103,7 +103,7 @@ class NewPlaceState extends State<NewPlace>{
           title: Text('Add Place', style: Theme.of(context).textTheme.subhead),
           leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () => _vm.navigate(null)
+              onPressed: () => _vm.navigate(null, null)
           ),
         ),
         body: Builder(
@@ -245,6 +245,13 @@ class NewPlaceState extends State<NewPlace>{
               if (!currentFocus.hasPrimaryFocus)
                 currentFocus.unfocus();
               vm.validateNewPlace(_storedImage, _position, context);
+              /*
+              setState((){
+                _storedImage = null;
+                _position = null;
+                _formKey.currentState.reset();
+              });
+               */
             }
             else
               Scaffold.of(context).showSnackBar(

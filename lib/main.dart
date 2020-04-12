@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:myplaces/features/place/place_page.dart';
 import 'package:myplaces/redux/Actions.dart';
 import 'package:redux/redux.dart';
 import 'AppRoutes.dart';
@@ -77,7 +78,8 @@ class MyPlacesApp extends StatelessWidget {
           AppRoutes.home: (BuildContext context) => const HomePage(),
           AppRoutes.favorite: (BuildContext context) => PlaceholderScreen(),
           AppRoutes.profile: (BuildContext context) => const ProfilePage(),
-          AppRoutes.addPlace: (BuildContext context) => NewPlace()
+          AppRoutes.addPlace: (BuildContext context) => NewPlace(),
+          AppRoutes.place: (BuildContext context) => PlacePage(),
         },
         home: FutureBuilder<FirebaseUser>(
           future: FirebaseAuth.instance.currentUser(),

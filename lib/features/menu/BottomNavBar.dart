@@ -21,11 +21,11 @@ class BottomNavBar extends StatelessWidget {
       {Icon icon, String routeName, @required MenuViewModel vm}) {
     if (!vm.route.contains(routeName))
       return _addPadding(
-          IconButton(icon: icon, onPressed: () => vm.navigate(routeName)));
+          IconButton(icon: icon, onPressed: () => vm.navigate(routeName, null)));
     else
       return _addPadding(IconButton(
           icon: icon,
-          onPressed: () => vm.navigate(routeName),
+          onPressed: () => vm.navigate(routeName, null),
           color: Theme.of(context).accentColor.withOpacity(0.7)));
   }
 

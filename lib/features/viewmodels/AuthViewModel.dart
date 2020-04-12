@@ -6,7 +6,7 @@ import '../../redux/Selectors.dart';
 import 'ViewModel.dart';
 
 class AuthViewModel extends ViewModel {
-  AuthViewModel._internal({@required List<String> route, @required Function(String) navigate, @required Store<AppState> store}){
+  AuthViewModel._internal({@required List<String> route, @required Function(String, Map<String, dynamic>) navigate, @required Store<AppState> store}){
     super.route = route;
     super.navigate = navigate;
     super.store = store;
@@ -18,7 +18,7 @@ class AuthViewModel extends ViewModel {
   static AuthViewModel fromStore(Store<AppState> store) {
     return AuthViewModel._internal(
       route: currentRoute(store.state),
-      navigate: (String routeName) => store.dispatch(NavigateReplaceAction(routeName)),
+      navigate: (String routeName, Map<String, dynamic> args) => store.dispatch(NavigateReplaceAction(routeName)),
       store: store
     );
   }

@@ -65,7 +65,7 @@ Future<void> _createPlace(Store<AppState> store, AddPlaceAction action, String d
       ref.updateData(<String, dynamic>{
         'places' : FieldValue.arrayUnion(<DocumentReference>[docRef])
       }).then((_){
-        final GetMPUserAction updateAction = GetMPUserAction();
+        final GetMPUserAction updateAction = GetMPUserAction(null);
         store.dispatch(updateAction);
         showSuccess(action.context);
       }).catchError((dynamic error) => showError(action.context));

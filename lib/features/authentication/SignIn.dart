@@ -186,7 +186,7 @@ class _SignInState extends State<SignIn> {
                           fontFamily: 'Orkney'
                       ),
                     ),
-                    onPressed: () => vm.navigate(AppRoutes.signUp)
+                    onPressed: () => vm.navigate(AppRoutes.signUp, null)
                 ),
               ],
             ),

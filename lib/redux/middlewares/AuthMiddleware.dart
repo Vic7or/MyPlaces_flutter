@@ -17,16 +17,16 @@ List<Middleware<AppState>> createAuthMiddlewares() {
 
 Future<void> _signIn(Store<AppState> store, SignInAction action, NextDispatcher next) async {
   final NavigateReplaceAction navAction = NavigateReplaceAction(AppRoutes.home);
-  final GetMPUserAction updateAction = GetMPUserAction();
+  //final GetMPUserAction updateAction = GetMPUserAction();
   if (action.user != null){
     next(action);
+    //store.dispatch(updateAction);
     if (action.context != null)
       store.dispatch(navAction);
     else {
       final NavigateHomeStartUpAction homeAction = NavigateHomeStartUpAction();
       store.dispatch(homeAction);
     }
-    store.dispatch(updateAction);
   }
   else {
     showLoadingDialog(action.context);
@@ -37,8 +37,8 @@ Future<void> _signIn(Store<AppState> store, SignInAction action, NextDispatcher 
       if (result != null && result.user != null) {
         final SignInAction signInSuccess = SignInAction(result.user, action.context, null, null);
         next(signInSuccess);
+        //store.dispatch(updateAction);
         store.dispatch(navAction);
-        store.dispatch(updateAction);
       }
     }
     catch (error) {

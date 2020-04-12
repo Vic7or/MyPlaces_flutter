@@ -5,13 +5,33 @@ import 'package:myplaces/AppRoutes.dart';
 import 'package:myplaces/features/viewmodels/AuthViewModel.dart';
 import 'package:myplaces/features/viewmodels/HomeViewModel.dart';
 import 'package:myplaces/features/viewmodels/ViewModel.dart';
+import 'package:myplaces/model/MyPlacesUser.dart';
+import 'package:myplaces/redux/Actions.dart';
 import 'package:myplaces/redux/AppState.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import '../menu/MainMenu.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return HomePageState();
+  }
+}
+
+class HomePageState extends State<HomePage> {
+
+  MyPlacesUser data;
+  ViewModel _vm;
+
+  void update(){
+    if (mounted)
+      setState(() {
+        data = _vm.store.state.mpUser;
+      });
+  }
 
   Widget createSeparator(BuildContext context) {
     return Container(
@@ -136,14 +156,22 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _getBody2(BuildContext context, HomeViewModel vm){
+    return Expanded(
+        child: StreamBuilder<void>(
+            builder: null
+        )
+    );
+  }
+
   Widget _getBody(BuildContext context, HomeViewModel vm) {
-    if (vm.store.state.mpUser != null)
+    if (data != null)
       return ListView.separated(
           separatorBuilder: (BuildContext context, int index) => Divider(
             height: 0.0,
             color: Theme.of(context).primaryColorDark.withOpacity(0.5),
           ),
-          itemCount: vm.store.state.mpUser.places.length,
+          itemCount: data.places.length,
           itemBuilder: (BuildContext context, int i){
             return Dismissible(
               confirmDismiss: (DismissDirection direction) => confirmDismiss(context),
@@ -151,18 +179,19 @@ class HomePage extends StatelessWidget {
               key: UniqueKey(),
               child:
               ListTile(
-                onTap: () => vm.navigate(AppRoutes.favorite),
+                onTap: () => vm.navigate(AppRoutes.place, <String, dynamic>{'place': data.places[i]}),
                 onLongPress: () => longPressActionsDialog(context),
-                title: Text(vm.store.state.mpUser.places[i].title, style: Theme.of(context).textTheme.subhead),
-                subtitle: Text(vm.store.state.mpUser.places[i].description, style: Theme.of(context).textTheme.body2),
-                leading: CircleAvatar(backgroundImage: NetworkImage(vm.store.state.mpUser.places[i].imageUrl)),
+                title: Text(data.places[i].title, style: Theme.of(context).textTheme.subhead),
+                subtitle: Text(data.places[i].description, style: Theme.of(context).textTheme.body2),
+                leading: CircleAvatar(backgroundImage: NetworkImage(data.places[i].imageUrl)),
                 trailing: const Icon(Icons.arrow_back_ios, color: Colors.white),
               ),
             );
           }
       );
-    else
+    else {
       return const SizedBox(width: 0,height: 0);
+    }
   }
 
   @override
@@ -174,6 +203,11 @@ class HomePage extends StatelessWidget {
               distinct: true,
               converter: (Store<AppState> store) => HomeViewModel.fromStore(store),
               builder: (BuildContext context, ViewModel vm){
+                _vm = vm;
+                if (data == null || data != vm.store.state.mpUser) {
+                  final GetMPUserAction action = GetMPUserAction(update);
+                  vm.store.dispatch(action);
+                }
                 return MainMenu(
                   Container(
                     decoration: BoxDecoration(
