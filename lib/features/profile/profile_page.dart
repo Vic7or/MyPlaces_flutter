@@ -55,7 +55,7 @@ class ProfilePageState extends State<ProfilePage> {
                         Image.asset('assets/images/placeholder.png').image,
                         fit: BoxFit.cover),
                     borderRadius: const BorderRadius.all(Radius.circular(45.0)),
-                    boxShadow: [BoxShadow(blurRadius: 7.0, color: Colors.black)]),
+                    boxShadow: <BoxShadow>[BoxShadow(blurRadius: 7.0, color: Colors.black)]),
               ),
             ),
             FloatingActionButton(

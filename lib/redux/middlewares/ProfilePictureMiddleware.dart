@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:myplaces/commons/LoadingDialog.dart';
 import 'package:redux/redux.dart';
 import '../Actions.dart';
 import '../AppState.dart';
