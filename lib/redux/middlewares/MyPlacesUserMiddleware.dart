@@ -47,7 +47,8 @@ Future<void> _getMyPlaceUser(Store<AppState> store, GetMPUserAction action, Next
           data['uid'],
           places,
           favoris,
-          docSnap.reference
+          docSnap.reference,
+          data['profilePicture']
         );
         action.user = mpUser;
         next(action);

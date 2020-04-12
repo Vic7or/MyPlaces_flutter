@@ -77,7 +77,7 @@ class MyPlacesApp extends StatelessWidget {
           AppRoutes.signUp: (BuildContext context) => const SignUp(),
           AppRoutes.home: (BuildContext context) => const HomePage(),
           AppRoutes.favorite: (BuildContext context) => FavoritePage(),
-          AppRoutes.profile: (BuildContext context) => const ProfilePage(),
+          AppRoutes.profile: (BuildContext context) => ProfilePage(),
           AppRoutes.addPlace: (BuildContext context) => NewPlace(),
           AppRoutes.place: (BuildContext context) => PlacePage(),
         },

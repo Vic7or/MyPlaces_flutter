@@ -119,3 +119,11 @@ class DelPlaceAction {
   Function update;
   BuildContext context;
 }
+
+class UploadProfilePictureAction {
+  UploadProfilePictureAction(this.imageFile, this.user, this.context, this.update);
+  File imageFile;
+  DocumentReference user;
+  Function update;
+  BuildContext context;
+}

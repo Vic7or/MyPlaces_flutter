@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import '../../redux/Actions.dart';
@@ -12,9 +13,6 @@ class ProfileViewModel extends ViewModel {
     super.store = store;
   }
 
-String name;
-String firstName;
-
   static ProfileViewModel fromStore(Store<AppState> store) {
     return ProfileViewModel._internal(
       route: currentRoute(store.state),
@@ -22,4 +20,10 @@ String firstName;
       store: store
     );
   }
+
+  void uploadPicture(File imageFile, BuildContext context, Function update) {
+    final UploadProfilePictureAction action = UploadProfilePictureAction(imageFile, store.state.mpUser.ref, context, update);
+    store.dispatch(action);
+  }
+
 }

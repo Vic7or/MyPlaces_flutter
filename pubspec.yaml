@@ -55,6 +55,7 @@ flutter:
     - assets/images/Logo_MP.png
     - assets/images/pointeur_minilogo_map.png
     - assets/animations/Liquid_Loader.flr
+    - assets/images/placeholder.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
