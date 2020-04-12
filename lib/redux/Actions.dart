@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -64,5 +66,17 @@ class DisconnectAction {
   @override
   String toString() {
     return 'DisconnectAction';
+  }
+}
+
+class UploadProfilePic {
+  UploadProfilePic(this.imageFile, this.user);
+  FirebaseUser user;
+  File imageFile;
+  BuildContext context;
+
+  @override
+  String toString() {
+    return 'UploadProfilePic';
   }
 }
