@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -6,6 +7,7 @@ import 'package:myplaces/features/viewmodels/AuthViewModel.dart';
 import 'package:myplaces/features/viewmodels/HomeViewModel.dart';
 import 'package:myplaces/features/viewmodels/ViewModel.dart';
 import 'package:myplaces/model/MyPlacesUser.dart';
+import 'package:myplaces/model/Place.dart';
 import 'package:myplaces/redux/Actions.dart';
 import 'package:myplaces/redux/AppState.dart';
 import 'package:redux/redux.dart';
@@ -93,7 +95,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void longPressActionsDialog(BuildContext _context) {
+  void longPressActionsDialog(BuildContext _context, DocumentReference userRef, DocumentReference placeRef) {
     showDialog<dynamic>(
       context: _context,
       builder: (BuildContext context) {
@@ -136,12 +138,8 @@ class HomePageState extends State<HomePage> {
                           icon: Icon(Icons.favorite, size: 40, color: Theme.of(context).primaryColorLight),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            Scaffold.of(_context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Ajouté aux favoris'),
-                                  duration: Duration(seconds: 1),
-                                )
-                            );
+                            final FavoriteAction action = FavoriteAction(placeRef, userRef, _context, update);
+                            _vm.store.dispatch(action);
                           }
                       ),
                       Text('FAVORIS', style: Theme.of(context).textTheme.subhead)
@@ -153,14 +151,6 @@ class HomePageState extends State<HomePage> {
           ),
         );
       }
-    );
-  }
-
-  Widget _getBody2(BuildContext context, HomeViewModel vm){
-    return Expanded(
-        child: StreamBuilder<void>(
-            builder: null
-        )
     );
   }
 
@@ -180,7 +170,7 @@ class HomePageState extends State<HomePage> {
               child:
               ListTile(
                 onTap: () => vm.navigate(AppRoutes.place, <String, dynamic>{'place': data.places[i]}),
-                onLongPress: () => longPressActionsDialog(context),
+                onLongPress: () => longPressActionsDialog(context, data.ref, data.places[i].ref),
                 title: Text(data.places[i].title, style: Theme.of(context).textTheme.subhead),
                 subtitle: Text(data.places[i].description, style: Theme.of(context).textTheme.body2),
                 leading: CircleAvatar(backgroundImage: NetworkImage(data.places[i].imageUrl)),

@@ -14,7 +14,6 @@ List<Middleware<AppState>> createNavigationMiddlewares() {
 
 void _navigateReplace(Store<AppState> store, dynamic action, NextDispatcher next) {
   final String routeName = (action as NavigateReplaceAction).routeName;
-  print(store.state.route);
   if (store.state.route.isEmpty || store.state.route.last != routeName) {
     navigatorKey.currentState.pushReplacementNamed(routeName);
   }
