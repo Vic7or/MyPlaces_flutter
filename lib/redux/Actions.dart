@@ -84,6 +84,18 @@ class AddPlaceAction {
   }
 }
 
+class DelPlaceAction {
+  DelPlaceAction(this.uid, this.placeNumber,this.context);
+  String   uid; // Places id
+  int placeNumber; 
+  BuildContext context;
+
+  @override
+  String toString() {
+    return 'DelPlaceAction';
+  }
+}
+
 class GetMPUserAction {
   MyPlacesUser user;
   @override
